@@ -70,13 +70,13 @@ CONTACTS_NOTIFIED
 
 ## Fall detection model
 
-The shipped model lives in `fall-detection-training/model/fall_impact_seq9_ensemble/`. It is a TorchScript ensemble of an LSTM and a Transformer encoder trained on 7 recorded sessions using leave-one-session-out cross-validation.
+The shipped model lives in `fall-detection-training/model/fall_impact_seq9_ensemble/`. It is a TorchScript ensemble of a CNN spectrogram encoder, an LSTM, and a Transformer encoder trained on 7 recorded sessions using leave-one-session-out cross-validation.
 
 - Input: 9 stacked 6-second windows (14-second receptive field)
-- CNN path: band-spectrogram tensor of shape `[1, 9, 32, 49, 21]`
+- Band-spectrogram tensor shape: `[1, 9, 32, 49, 21]` (9 windows x 32 channels x 49 freq bins x 21 time steps)
 - Classes: binary -- `FALL_IMPACT` vs everything else
 - Window-level macro-F1: 0.81, FALL_IMPACT recall: 91% at threshold 0.50
-- Event-level pooled F1: 0.93 at threshold 0.50
+- Event-level F1: 0.90 at threshold 0.50 (90% precision, 90% recall on held-out session)
 
 See `fall-detection-training/README.md` for the full training pipeline.
 

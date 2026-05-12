@@ -102,6 +102,6 @@ The shipped model is binary (`FALL_IMPACT` vs `NOT_FALL_IMPACT`) with the 6-clas
 
 ## Notes on the shipped model
 
-`model/fall_impact_seq9_ensemble/` was trained on a 7-session dataset using LOOCV. Reported on the held-out window-level test set: macro-F1 = 0.81, FALL_IMPACT recall = 91% at threshold 0.50. Event-level pooled F1 = 0.93 at threshold 0.50, 0.87 at 0.84.
+`model/fall_impact_seq9_ensemble/` was trained on a 7-session dataset using LOOCV. Reported on the held-out window-level test set: macro-F1 = 0.81, FALL_IMPACT recall = 91% at threshold 0.50. Event-level on held-out session: 90% precision / 90% recall / F1 = 0.90 at threshold 0.50; 100% precision / 70% recall / F1 = 0.82 at threshold 0.84. Zero false alert events on empty-room baseline.
 
-The model is a TorchScript blend of a sequence LSTM and a Transformer encoder. Calibrated probabilities (temperature 0.3). Suggested deployment thresholds: `0.50` (balanced demo) / `0.84` (low false alert).
+The model is a TorchScript ensemble of a CNN spectrogram encoder, a sequence LSTM, and a Transformer encoder. Calibrated probabilities (temperature 0.3). Suggested deployment thresholds: `0.50` (balanced demo) / `0.84` (low false alert).
